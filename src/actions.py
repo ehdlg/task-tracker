@@ -1,5 +1,7 @@
 from datetime import datetime
 
+from colorama import Fore
+
 from data_service import add, get, get_id, save
 
 
@@ -14,7 +16,7 @@ def add_task(description: str):
 
     add(new_task)
 
-    print(f"Task added succesfully (ID: {new_task.get('id')})")
+    print(f"{Fore.GREEN}Task added succesfully (ID: {new_task.get('id')})")
 
 
 def delete_task(id: int):
@@ -27,8 +29,35 @@ def delete_task(id: int):
             del tasks[index]
             save(tasks)
 
-            print(f"Task {id} deleted")
+            print(f"{Fore.GREEN}Task {id} deleted")
             exit()
 
-    print(f"Task {id} not found")
+    return task_not_found(id)
+
+
+def update_task(id: int, new_description: str):
+    tasks = get()
+
+    for index, task in enumerate(tasks):
+        task_id = task.get("id", None)
+        print(task_id, id)
+
+        if task_id == id:
+            print("task updating...")
+            task.update({
+                "description": new_description,
+                "updated_at": str(datetime.now()),
+            })
+
+            save(tasks)
+
+            print(f"{Fore.GREEN}Task {id} suffesfully updated")
+            exit()
+
+    return task_not_found(id)
+
+
+def task_not_found(id: int):
+    print(f"{Fore.YELLOW}Task {id} not found")
+
     exit()
