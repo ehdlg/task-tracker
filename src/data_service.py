@@ -27,3 +27,24 @@ def add(new_task):
 def save(new_tasks: list) -> None:
     with open("../data.json", "w+") as f:
         json.dump(new_tasks, f)
+
+
+def get_id():
+    tasks = get()
+
+    if not tasks:
+        return 1
+
+    tasks_sorted = sorted(tasks, key=lambda x: x.get("id", float("inf")))
+
+    last_id = 0
+    for task in tasks_sorted:
+        task_id = task.get("id", None)
+
+        if task_id is not None:
+            if task_id - last_id > 1:
+                return last_id + 1
+
+            last_id = task_id
+
+    return last_id + 1
