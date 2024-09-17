@@ -16,10 +16,14 @@ def get_tasks() -> list:
         return DEFAULT_FILE_VALUE
 
 
-def update_tasks(new_tasks: list) -> None:
-    persist_data(new_tasks)
+def add_task(new_task):
+    tasks = get_tasks()
+
+    tasks.append(new_task)
+
+    persist_data(tasks)
 
 
-def persist_data(new_data: list) -> None:
+def persist_data(new_tasks: list) -> None:
     with open("../data.json", "w+") as f:
-        json.dump(new_data, f)
+        json.dump(new_tasks, f)
