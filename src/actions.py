@@ -35,26 +35,37 @@ def delete_task(id: int):
     return task_not_found(id)
 
 
-def update_task(id: int, new_description: str):
+def update(id: int, **new_data):
     tasks = get()
 
-    for index, task in enumerate(tasks):
+    for task in tasks:
         task_id = task.get("id", None)
-        print(task_id, id)
 
         if task_id == id:
-            print("task updating...")
-            task.update({
-                "description": new_description,
-                "updated_at": str(datetime.now()),
-            })
+            task.update(new_data)
 
             save(tasks)
 
-            print(f"{Fore.GREEN}Task {id} suffesfully updated")
+            print(f"{Fore.GREEN}Task {id} suffessfully updated")
             exit()
 
     return task_not_found(id)
+
+
+def update_description(id: int, new_description: str):
+    return update(id, {"description": new_description})
+
+
+def mark_done(id: int):
+    return update(id, {"status": "completed"})
+
+
+def mark_in_progress(id: int):
+    return update(id, {"status": "in progress"})
+
+
+def mark_todo(id: int):
+    return update(id, {"status": "todo"})
 
 
 def task_not_found(id: int):
