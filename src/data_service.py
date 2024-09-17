@@ -3,7 +3,7 @@ import json
 DEFAULT_FILE_VALUE: list = []
 
 
-def get_tasks() -> list:
+def get() -> list:
     try:
         with open("../data.json", "r") as tasks_file:
             raw_data = tasks_file.read()
@@ -11,19 +11,19 @@ def get_tasks() -> list:
 
             return data
     except Exception:
-        persist_data(DEFAULT_FILE_VALUE)
+        save(DEFAULT_FILE_VALUE)
 
         return DEFAULT_FILE_VALUE
 
 
-def add_task(new_task):
-    tasks = get_tasks()
+def add(new_task):
+    tasks = get()
 
     tasks.append(new_task)
 
-    persist_data(tasks)
+    save(tasks)
 
 
-def persist_data(new_tasks: list) -> None:
+def save(new_tasks: list) -> None:
     with open("../data.json", "w+") as f:
         json.dump(new_tasks, f)
