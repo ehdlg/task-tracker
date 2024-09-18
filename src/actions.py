@@ -1,6 +1,7 @@
 from datetime import datetime
 
 from colorama import Fore
+from tabulate import tabulate
 
 from data_service import add, get, get_id, save
 
@@ -66,6 +67,39 @@ def mark_in_progress(id: int):
 
 def mark_todo(id: int):
     return update(id, status="todo")
+
+
+def list_tasks(filter: str):
+    tasks = get()
+
+    if len(tasks) == 0:
+        print(f"{Fore.YELLOW}There are no tasks yet. Add a new task with <add>")
+
+        exit()
+
+    headers = [["ID", "Description", "Created", "Status"]]
+
+    tasks_values = [
+        [
+            task.get("id"),
+            task.get("description"),
+            datetime.strftime(
+                datetime.fromisoformat(task.get("created_at")), "%Y-%m-%d"
+            ),
+            task.get("status"),
+        ]
+        for task in tasks
+        if filter is None or task.get("status") == filter
+    ]
+
+    if len(tasks_values) == 0:
+        print(f"{Fore.YELLOW}No tasks with the current filter")
+
+        exit()
+
+    data = headers + tasks_values
+
+    return print(tabulate(data, tablefmt="grid"))
 
 
 def task_not_found(id: int):
