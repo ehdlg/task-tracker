@@ -9,7 +9,7 @@ def add_task(description: str):
     new_task = {
         "id": get_id(),
         "description": description,
-        "completed": False,
+        "status": "todo",
         "created_at": str(datetime.now()),
         "updated_at": None,
     }
