@@ -19,7 +19,15 @@ The application allows users to manage tasks through terminal commands. Tasks ar
 
 ## Installation
 
-To install and run the Task Tracker CLI, follow these steps:
+To install the Task Tracker CLI from PyPI, use the following command:
+
+```bash
+pip install tasktracker-ehdlg
+```
+
+Then you can use the tool with the script `task-tracker-ehdlg`.
+
+You can also install and use the program following these steps:
 
 1. Clone the repository:
 
