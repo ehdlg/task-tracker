@@ -3,7 +3,7 @@ from datetime import datetime
 from colorama import Fore
 from tabulate import tabulate
 
-from data_service import add, get, get_id, save
+from tasktracker_ehdlg.data_service import add, get, get_id, save
 
 
 def add_task(description: str):

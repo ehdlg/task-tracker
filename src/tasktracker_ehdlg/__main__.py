@@ -1,6 +1,4 @@
-from parser import parser
-
-from actions import (
+from tasktracker_ehdlg.actions import (
     add_task,
     delete_task,
     list_tasks,
@@ -9,8 +7,7 @@ from actions import (
     mark_todo,
     update,
 )
-
-args = parser.parse_args()
+from tasktracker_ehdlg.parser import parser
 
 ACTIONS = {
     "add": lambda args: add_task(args.description),
@@ -23,9 +20,12 @@ ACTIONS = {
 }
 
 
-if args.command is None:
-    parser.print_help()
+def main():
+    args = parser.parse_args()
 
-    exit()
+    if args.command is None:
+        parser.print_help()
 
-ACTIONS[args.command](args)
+        exit()
+
+    ACTIONS[args.command](args)
