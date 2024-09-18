@@ -2,4 +2,7 @@
 data.json
 dist/
 .env
+.venv
 .nenv
+**-info/
+build/
