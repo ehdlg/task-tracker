@@ -10,7 +10,8 @@ readme = "README.md"
 authors = [{ name = "Enrique Hidalgo" }]
 keywords = ["tasks", "cli"]
 dependencies = [
-    "tabulate"
+    "tabulate", 
+    "colorama"
 ]
 requires-python = ">=3.9"
 
