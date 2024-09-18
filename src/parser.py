@@ -11,7 +11,16 @@ delete_parser.add_argument("id", type=int, help="Task's ID")
 
 update_parser = subparsers.add_parser("update", help="Update an existing task")
 update_parser.add_argument("id", help="Task's ID", type=int)
-update_parser.add_argument("description", help="New taks description", type=str)
+update_parser.add_argument("description", help="New task description", type=str)
 
 
-args = parser.parse_args()
+mark_in_progress = subparsers.add_parser(
+    "mark-in-progress", help="Change the task status to 'in progress'"
+)
+mark_in_progress.add_argument("id", type=int, help="Task's ID")
+
+mark_done = subparsers.add_parser("mark-done", help="Change the task status to 'done'")
+mark_done.add_argument("id", type=int, help="Taks's ID")
+
+mark_todo = subparsers.add_parser("mark-todo", help="Change the task status to 'todo'")
+mark_todo.add_argument("id", type=int, help="Task's ID")

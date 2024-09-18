@@ -53,19 +53,19 @@ def update(id: int, **new_data):
 
 
 def update_description(id: int, new_description: str):
-    return update(id, {"description": new_description})
+    return update(id, description=new_description)
 
 
 def mark_done(id: int):
-    return update(id, {"status": "completed"})
+    return update(id, status="done")
 
 
 def mark_in_progress(id: int):
-    return update(id, {"status": "in progress"})
+    return update(id, status="in-progress")
 
 
 def mark_todo(id: int):
-    return update(id, {"status": "todo"})
+    return update(id, status="todo")
 
 
 def task_not_found(id: int):
