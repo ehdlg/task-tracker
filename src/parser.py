@@ -24,3 +24,13 @@ mark_done.add_argument("id", type=int, help="Taks's ID")
 
 mark_todo = subparsers.add_parser("mark-todo", help="Change the task status to 'todo'")
 mark_todo.add_argument("id", type=int, help="Task's ID")
+
+list_todos = subparsers.add_parser("list", help="List the task in a table")
+list_todos.add_argument(
+    "filter",
+    type=str,
+    help="Filter the tasks by their status",
+    default=None,
+    nargs="?",
+    choices=("done", "todo", "in-progress"),
+)
